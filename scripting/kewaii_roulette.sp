@@ -11,7 +11,7 @@ bool isSpinning[MAXPLAYERS + 1] = false;
 #define PLUGIN_NAME "Store Roulette"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.1"
+#define PLUGIN_VERSION "1.3.2"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -96,7 +96,7 @@ Menu CreatePlayerRouletteMenu(int client)
 	char buffer[128];
 	Format(buffer, sizeof(buffer), "%T", "ChooseCredits", client, Store_GetClientCredits(client));
 	menu.SetTitle(buffer);	
-	menu.AddItem("50", "50");
+	menu.AddItem("50", "50");	
 	menu.AddItem("100", "100");	
 	menu.AddItem("250", "250");	
 	menu.AddItem("500", "500");	
@@ -108,11 +108,11 @@ Menu CreatePlayerRouletteMenu(int client)
 Menu CreateVIPRouletteMenu(int client)
 {
 	Menu menu = new Menu(CreditsChosenMenuHandler);
-	char buffer[128];
+	char buffer[128];		
 	Format(buffer, sizeof(buffer), "%T", "ChooseCredits", client, Store_GetClientCredits(client));
 	menu.SetTitle(buffer);	
 	menu.AddItem("1000", "1000");
-	menu.AddItem("5000", "2500");	
+	menu.AddItem("2500", "2500");	
 	menu.AddItem("5000", "5000");	
 	menu.AddItem("10000", "10000");	
 	menu.ExitBackButton = true;
