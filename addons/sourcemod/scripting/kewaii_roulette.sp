@@ -8,10 +8,16 @@ int WinNumber[MAXPLAYERS + 1];
 int betAmount[MAXPLAYERS + 1];
 bool isSpinning[MAXPLAYERS + 1] = false;
 
+
+ConVar g_Cvar_NormalItems;
+ConVar g_Cvar_VIPItems;
+
+char g_sNormalItems[64];
+char g_sVIPItems[64];
 #define PLUGIN_NAME "Store Roulette"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.2"
+#define PLUGIN_VERSION "1.3.4"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -25,6 +31,8 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
+	g_Cvar_NormalItems = CreateConVar("kewaii_roulette_normal_items", "50,100,250,500", "Lists all the menu items for normal player roulette. Separate each item with a comma. Only integers allowed");
+	g_Cvar_VIPItems = CreateConVar("kewaii_roulette_vip_items", "1000,2500,5000,10000", "Lists all the menu items for VIP player roulette. Separate each item with a comma. Only integers allowed");
 	RegConsoleCmd("sm_roleta", CommandRoulette);
 	RegConsoleCmd("sm_roulette", CommandRoulette);
 	for (int i = 1; i <= MaxClients; i++)
@@ -35,6 +43,7 @@ public void OnPluginStart()
 		}
 	}
 	LoadTranslations("kewaii_roulette.phrases");
+	AutoExecConfig(true, "kewaii_roulette");
 }
 
 public void OnClientPostAdminCheck(int client)
@@ -96,10 +105,14 @@ Menu CreatePlayerRouletteMenu(int client)
 	char buffer[128];
 	Format(buffer, sizeof(buffer), "%T", "ChooseCredits", client, Store_GetClientCredits(client));
 	menu.SetTitle(buffer);	
-	menu.AddItem("50", "50");	
-	menu.AddItem("100", "100");	
-	menu.AddItem("250", "250");	
-	menu.AddItem("500", "500");	
+	GetConVarString(g_Cvar_NormalItems, g_sNormalItems, sizeof(g_sNormalItems));
+	char sItems[18][16];
+	ExplodeString(g_sNormalItems, ",", sItems, sizeof(sItems), sizeof(sItems[]));
+	for (int i = 0; i < sizeof(sItems); i++) {
+		if (!StrEqual(sItems[i], "")) {
+			menu.AddItem(sItems[i], sItems[i]);	
+		}
+	}
 	menu.ExitBackButton = true;
 	return menu;
 }
@@ -111,10 +124,14 @@ Menu CreateVIPRouletteMenu(int client)
 	char buffer[128];		
 	Format(buffer, sizeof(buffer), "%T", "ChooseCredits", client, Store_GetClientCredits(client));
 	menu.SetTitle(buffer);	
-	menu.AddItem("1000", "1000");
-	menu.AddItem("2500", "2500");	
-	menu.AddItem("5000", "5000");	
-	menu.AddItem("10000", "10000");	
+	GetConVarString(g_Cvar_VIPItems, g_sVIPItems, sizeof(g_sVIPItems));
+	char sItems[18][16];
+	ExplodeString(g_sVIPItems, ",", sItems, sizeof(sItems), sizeof(sItems[]));
+	for (int i = 0; i < sizeof(sItems); i++) {
+		if (!StrEqual(sItems[i], "")) {
+			menu.AddItem(sItems[i], sItems[i]);	
+		}
+	}
 	menu.ExitBackButton = true;
 	return menu;
 }
