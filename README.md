@@ -6,4 +6,6 @@
 ## Choose Amount of Credits as VIP or with flag 'o'
 ![Choose Amount VIP](https://image.prntscr.com/image/wUjxB5tWR2GKRd8Cg__Hhg.png "Choose Amount of Credits as VIP or flag 'o'")
 ## Roulette Animation
-![Animation](https://upload.wikimedia.org/wikipedia/en/d/d6/Image_coming_soon.png "Roulette Animation")
+![Animation](https://thumbs.gfycat.com/PoliticalLeanLadybird-size_restricted.gif "Roulette Animation")
+## Chat Win Message
+![Win Message](https://image.prntscr.com/image/OIEIep8YTMihe0M1EBjaxg.png "Chat Win Message")
