@@ -17,7 +17,7 @@ char g_sVIPItems[64];
 #define PLUGIN_NAME "Store Roulette"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.4"
+#define PLUGIN_VERSION "1.3.5"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -187,7 +187,7 @@ public int CreditsChosenMenuHandler(Menu menu, MenuAction action, int client, in
 public void SpinCredits(int client)
 {
 	int	FakeNumber = GetRandomInt(0,999);
-	PrintHintText(client, "<font color='#ff0000'>[Roulette]</font><font color='#00ff00'> Number:</font><font color='#0000ff'> %i", FakeNumber);
+	PrintHintText(client, "<font color='#ff0000'>[Credits Roulette]</font><font color='#00ff00'> Number:</font><font color='#0000ff'> %i", FakeNumber);
 	if(ScrollTimes[client] == 0)
 	{
 		ClientCommand(client, "playgamesound *ui/csgo_ui_crate_open.wav");
