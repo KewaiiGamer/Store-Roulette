@@ -35,13 +35,6 @@ public void OnPluginStart()
 	g_Cvar_VIPItems = CreateConVar("kewaii_roulette_vip_items", "1000,2500,5000,10000", "Lists all the menu items for VIP player roulette. Separate each item with a comma. Only integers allowed");
 	RegConsoleCmd("sm_roleta", CommandRoulette);
 	RegConsoleCmd("sm_roulette", CommandRoulette);
-	for (int i = 1; i <= MaxClients; i++)
-	{
-		if (IsClientInGame(i))
-		{
-			OnClientPostAdminCheck(i);
-		}
-	}
 	LoadTranslations("kewaii_roulette.phrases");
 	AutoExecConfig(true, "kewaii_roulette");
 }
