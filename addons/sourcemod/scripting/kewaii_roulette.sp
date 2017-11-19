@@ -17,7 +17,7 @@ char g_sVIPItems[64];
 #define PLUGIN_NAME "Store Roulette"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.5.1"
+#define PLUGIN_VERSION "1.3.5.2"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -237,7 +237,7 @@ public void WinCredits(int client, int Number, int Bet)
 {
 	if(IsClientInGame(client))
 	{
-		CPrintToChat(client, "%s %t", PLUGIN_TAG, "WinNumber", Number);		
+		CPrintToChatAll("%s %t", PLUGIN_TAG, "WinNumber", Number);		
 		int multiplier;
 		if(Number == 0)
 		{
@@ -247,13 +247,13 @@ public void WinCredits(int client, int Number, int Bet)
 		else if(Number > 0 && Number <= 500)
 		{
 			ClientCommand(client, "playgamesound music/skog_01/lostround.mp3");
-			CPrintToChat(client, "%s %t", PLUGIN_TAG, "YouLost", Bet);
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouLost", Bet);
 		}
 		else if(Number > 500 && Number <= 600)
 		{			
 			multiplier = 0;
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChat(client, "%s %t", PLUGIN_TAG, "NoLoseNoWin");
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin");
 		} 
 		else if(Number > 600 && Number <= 750)
 		{
@@ -298,12 +298,12 @@ public void WinCredits(int client, int Number, int Bet)
 		else
 		{		
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChat(client, "%s %t", PLUGIN_TAG, "NoLoseNoWin");		
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin");		
 			Store_SetClientCredits(client, Store_GetClientCredits(client) + (Bet));
 		}	
 		if (Number == 0 || Number > 600)
 		{		
-			CPrintToChat(client, "%s %t", PLUGIN_TAG, "YouWin", Bet * multiplier, multiplier);
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", Bet * multiplier, multiplier);
 		}
 		if (Number == 0 || Number > 500)
 		{
