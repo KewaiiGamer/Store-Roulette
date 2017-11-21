@@ -36,7 +36,6 @@ Soon (TM) [AlliedModders]
 ![Animation](https://thumbs.gfycat.com/PoliticalLeanLadybird-size_restricted.gif "Roulette Animation")
 ## Chat Win Message
 ![Win Message](https://image.prntscr.com/image/OIEIep8YTMihe0M1EBjaxg.png "Chat Win Message")
-# RiceCraftingTable
 
 ## Issues
 

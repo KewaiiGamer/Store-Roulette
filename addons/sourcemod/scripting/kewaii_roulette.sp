@@ -14,7 +14,7 @@ ConVar g_Cvar_VIPItems;
 
 char g_sNormalItems[64];
 char g_sVIPItems[64];
-#define PLUGIN_NAME "Store Roulette"
+#define PLUGIN_NAME "Store Roulette by Kewaii"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
 #define PLUGIN_VERSION "1.3.5.2"
