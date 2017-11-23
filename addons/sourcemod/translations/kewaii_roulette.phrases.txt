@@ -34,7 +34,7 @@
   } 
   "YouWin"
   {
-    "#format" "{1:i}, {2:i}"
+    "#format" "{1:i},{2:i}"
 	"pt" "Ganhaste {red}{1}{green} Créditos{blue}[x{2}]{green}"
 	"en" "You won {red}{1}{green} Credits{blue}[x{2}]{green}"
 	"hu" "Nyertél {red}{1}{green} kreditet{blue}[x{2}]{green}"
