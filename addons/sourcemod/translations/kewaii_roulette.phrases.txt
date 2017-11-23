@@ -18,7 +18,7 @@
     "#format" "{1:i}"
 	"pt" "Precisas de mais {1} créditos para apostar!"
 	"en" "You need more {1} credits to bet"
-	"hu" "{1} Kreditre van még szükséged a fogadáshoz"
+	"hu" "{1} kreditre van még szükséged a fogadáshoz"
   } 
   "AlreadySpinning"
   {
