@@ -44,7 +44,7 @@
     "#format" "{1:i}"
 	"pt" "Perdeste {red}{1}{green} créditos"
 	"en" "You lost {red}{1}{green} credits"
-	"hu" "Vesztettél{red}{1}{green} kreditet"
+	"hu" "Vesztettél {red}{1}{green} kreditet"
   } 
   "WinNumber"
   {
