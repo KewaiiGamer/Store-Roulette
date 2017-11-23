@@ -4,45 +4,53 @@
   {
 	"pt" "Escolhe o tipo de aposta"
 	"en" "Choose the type of bet"
+	"hu" "Válaszd ki a fogadásod típusát"
   } 
   "ChooseCredits"
   {
     "#format" "{1:i}"
 	"pt" "Escolhe a quantidade de créditos! Tens: {1} Créditos"
 	"en" "Choose the amount of credits! You have: {1} Credits"
+	"hu" "Válassz kredit mennyiséget! {1} Kredited van"
   } 
   "NoEnoughCredits"
   {
     "#format" "{1:i}"
 	"pt" "Precisas de mais {1} créditos para apostar!"
 	"en" "You need more {1} credits to bet"
+	"hu" "{1} kreditre van még szükséged a fogadáshoz"
   } 
   "AlreadySpinning"
   {
 	"pt" "A Roleta já está a rodar. Espera que acabe"
 	"en" "Roulette already spinning. Wait for it to finish"
+	"hu" "Rulett jelenleg pörög. Várd meg a végét"
   } 
   "NoLoseNoWin"
   {
 	"pt" "Não perdeste nem ganhaste"
 	"en" "You didn't lose nor win"
+	"hu" "Nem veszettél, és nem is nyertél"
   } 
   "YouWin"
   {
     "#format" "{1:i}, {2:i}"
 	"pt" "Ganhaste {red}{1}{green} Créditos{blue}[x{2}]{green}"
 	"en" "You won {red}{1}{green} Credits{blue}[x{2}]{green}"
+	"hu" "Nyertél {red}{1}{green} kreditet{blue}[x{2}]{green}"
   } 
   "YouLost"
   {
     "#format" "{1:i}"
 	"pt" "Perdeste {red}{1}{green} créditos"
 	"en" "You lost {red}{1}{green} credits"
+	"hu" "Vesztettél{red}{1}{green} kreditet"
   } 
   "WinNumber"
   {
     "#format" "{1:i}"
 	"pt" "Calhou-te o número: {red}{1}"
 	"en" "You got number: {red}{1}"
+	"hu" "Számod: {red}{1}"
   }
 }
