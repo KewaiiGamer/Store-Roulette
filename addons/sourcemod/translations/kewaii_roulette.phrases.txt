@@ -28,29 +28,26 @@
   } 
   "NoLoseNoWin"
   {
-	"pt" "Não perdeste nem ganhaste"
-	"en" "You didn't lose nor win"
-	"hu" "Nem veszettél, és nem is nyertél"
+	"#format" "{1:N}"
+	"pt" "{1} não perdeu nem ganhou"
+	"en" "{1} didn't lose nor win"
   } 
   "YouWin"
   {
-    "#format" "{1:i},{2:i}"
-	"pt" "Ganhaste {red}{1}{green} Créditos{blue}[x{2}]{green}"
-	"en" "You won {red}{1}{green} Credits{blue}[x{2}]{green}"
-	"hu" "Nyertél {red}{1}{green} kreditet{blue}[x{2}]{green}"
+    "#format" "[1:N},{2:i},{3:i}"
+	"pt" "{1} ganhou {red}{2}{green} Créditos{blue}[x{2}]{green}"
+	"en" "{1} won {red}{2}{green} Credits{blue}[x{2}]{green}"
   } 
   "YouLost"
   {
-    "#format" "{1:i}"
-	"pt" "Perdeste {red}{1}{green} créditos"
-	"en" "You lost {red}{1}{green} credits"
-	"hu" "Vesztettél{red}{1}{green} kreditet"
+    "#format" "{1:N},{2:i}"
+	"pt" "{1} perdeu {red}{2}{green} créditos"
+	"en" "{1} lost {red}{2}{green} credits"
   } 
   "WinNumber"
   {
-    "#format" "{1:i}"
-	"pt" "Calhou-te o número: {red}{1}"
-	"en" "You got number: {red}{1}"
-	"hu" "Számod: {red}{1}"
+    "#format" "{1:N},{2:i}"
+	"pt" "{1} calhou o número: {red}{1}"
+	"en" "{1} got number: {red}{1}"
   }
 }

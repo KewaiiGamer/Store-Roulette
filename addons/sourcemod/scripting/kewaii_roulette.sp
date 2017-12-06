@@ -237,7 +237,7 @@ public void WinCredits(int client, int Number, int Bet)
 {
 	if(IsClientInGame(client))
 	{
-		CPrintToChatAll("%s %t", PLUGIN_TAG, "WinNumber", Number);		
+		CPrintToChatAll("%s %t", PLUGIN_TAG, "WinNumber", client, Number);		
 		int multiplier;
 		if(Number == 0)
 		{
@@ -247,13 +247,13 @@ public void WinCredits(int client, int Number, int Bet)
 		else if(Number > 0 && Number <= 500)
 		{
 			ClientCommand(client, "playgamesound music/skog_01/lostround.mp3");
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouLost", Bet);
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouLost", client, Bet);
 		}
 		else if(Number > 500 && Number <= 600)
 		{			
 			multiplier = 0;
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin");
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLosenoWin", client);
 		} 
 		else if(Number > 600 && Number <= 750)
 		{
@@ -298,12 +298,12 @@ public void WinCredits(int client, int Number, int Bet)
 		else
 		{		
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin");		
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin", client);		
 			Store_SetClientCredits(client, Store_GetClientCredits(client) + (Bet));
 		}	
 		if (Number == 0 || Number > 600)
-		{		
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", Bet * multiplier, multiplier);
+		{	
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", client, Bet * multiplier, multiplier);
 		}
 		if (Number == 0 || Number > 500)
 		{
