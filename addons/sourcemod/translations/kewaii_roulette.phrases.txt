@@ -35,8 +35,8 @@
   "YouWin"
   {
     "#format" "[1:N},{2:i},{3:i}"
-	"pt" "{1} ganhou {red}{2}{green} Créditos{blue}[x{2}]{green}"
-	"en" "{1} won {red}{2}{green} Credits{blue}[x{2}]{green}"
+	"pt" "{1} ganhou {red}{2}{green} Créditos{blue}[x{3}]{green}"
+	"en" "{1} won {red}{2}{green} Credits{blue}[x{3}]{green}"
   } 
   "YouLost"
   {
@@ -47,7 +47,7 @@
   "WinNumber"
   {
     "#format" "{1:N},{2:i}"
-	"pt" "{1} calhou o número: {red}{1}"
-	"en" "{1} got number: {red}{1}"
+	"pt" "{1} calhou o número: {red}{2}"
+	"en" "{1} got number: {red}{2}"
   }
 }
