@@ -17,7 +17,7 @@ char g_sVIPItems[64];
 #define PLUGIN_NAME "Store Roulette by Kewaii"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.6.0"
+#define PLUGIN_VERSION "1.3.7"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -103,7 +103,7 @@ Menu CreatePlayerRouletteMenu(int client)
 	ExplodeString(g_sNormalItems, ",", sItems, sizeof(sItems), sizeof(sItems[]));
 	for (int i = 0; i < sizeof(sItems); i++) {
 		if (!StrEqual(sItems[i], "")) {
-			menu.AddItem(sItems[i], sItems[i]);	
+			menu.AddItem(sItems[i], sItems[i], Store_GetClientCredits(client) >= StringToInt(sItems[i]) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);	
 		}
 	}
 	menu.ExitBackButton = true;
@@ -122,7 +122,7 @@ Menu CreateVIPRouletteMenu(int client)
 	ExplodeString(g_sVIPItems, ",", sItems, sizeof(sItems), sizeof(sItems[]));
 	for (int i = 0; i < sizeof(sItems); i++) {
 		if (!StrEqual(sItems[i], "")) {
-			menu.AddItem(sItems[i], sItems[i]);	
+			menu.AddItem(sItems[i], sItems[i], Store_GetClientCredits(client) >= StringToInt(sItems[i]) ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);	
 		}
 	}
 	menu.ExitBackButton = true;
@@ -158,8 +158,7 @@ public int CreditsChosenMenuHandler(Menu menu, MenuAction action, int client, in
 				} 
 				else
 				{
-					CPrintToChat(client, "%s %t", PLUGIN_TAG, bet - crd, "NoEnoughCredits");
-					delete menu;
+					CPrintToChat(client, "%s %t", PLUGIN_TAG,  "NoEnoughCredits", bet - crd);
 				}
 			}
 		}
@@ -228,8 +227,8 @@ public Action TimerFinishing(Handle timer, any client)
 {
 	if (IsClientInGame(client))
 	{
-		WinCredits(client, WinNumber[client], betAmount[client]);
 		isSpinning[client] = false;
+		WinCredits(client, WinNumber[client], betAmount[client]);
 	}
 }
 
@@ -244,48 +243,49 @@ public void WinCredits(int client, int Number, int Bet)
 			multiplier = 25;
 			ClientCommand(client, "playgamesound *ui/item_drop6_ancient.wav");
 		}
-		else if(Number > 0 && Number <= 500)
+		else if(Number > 0 && Number < 500)
 		{
+			multiplier = -1;
 			ClientCommand(client, "playgamesound music/skog_01/lostround.mp3");
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouLost", client, Bet);
 		}
-		else if(Number > 500 && Number <= 600)
+		else if(Number >= 500 && Number < 600)
 		{			
 			multiplier = 0;
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLosenoWin", client);
 		} 
-		else if(Number > 600 && Number <= 750)
+		else if(Number >= 600 && Number < 750)
 		{
 			multiplier = 1;
 			ClientCommand(client, "playgamesound *ui/item_drop2_uncommon.wav");
 		}
-		else if(Number > 750 && Number <= 850)
+		else if(Number >= 750 && Number < 850)
 		{
 			multiplier = 2;
 			ClientCommand(client, "playgamesound *ui/item_drop2_uncommon.wav");
 		} 
-		else if(Number > 850 && Number <= 925)
+		else if(Number >= 850 && Number < 925)
 		{
 			multiplier = 3;
 			ClientCommand(client, "playgamesound *ui/item_drop3_rare.wav");
 		}
-		else if(Number > 925 && Number <= 965)
+		else if(Number >= 925 && Number < 965)
 		{			
 			multiplier = 4;
 			ClientCommand(client, "playgamesound *ui/item_drop3_rare.wav");
 		} 
-		else if(Number > 965 && Number <= 996)
+		else if(Number >= 965 && Number < 995)
 		{
 			multiplier = 5;
 			ClientCommand(client, "playgamesound *ui/item_drop3_rare.wav");
 		}
-		else if(Number == 997)
+		else if(Number >= 995 && Number < 997)
 		{
 			multiplier = 10;
 			ClientCommand(client, "playgamesound *ui/item_drop3_rare.wav");
 		} 
-		else if(Number == 998)
+		else if(Number >= 997 && Number < 999)
 		{
 			multiplier = 15;
 			ClientCommand(client, "playgamesound *ui/item_drop3_rare.wav");
@@ -301,14 +301,11 @@ public void WinCredits(int client, int Number, int Bet)
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin", client);		
 			Store_SetClientCredits(client, Store_GetClientCredits(client) + (Bet));
 		}	
-		if (Number == 0 || Number > 600)
+		if (multiplier > 0)
 		{	
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", client, Bet * multiplier, multiplier);
 		}
-		if (Number == 0 || Number > 500)
-		{
-			Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * (multiplier + 1));		
-		}
+		Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * multiplier);
 	}
 }
 
