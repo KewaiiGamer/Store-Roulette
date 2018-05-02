@@ -300,7 +300,7 @@ public void WinCredits(int client, int Number, int Bet)
 		if (multiplier > 0)
 		{	
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", client, Bet * multiplier, multiplier);
-			Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * multiplier);
+			Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * (multiplier + 1));
 		}
 	}
 }
