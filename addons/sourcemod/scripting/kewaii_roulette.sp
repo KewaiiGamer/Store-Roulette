@@ -11,13 +11,14 @@ bool isSpinning[MAXPLAYERS + 1] = false;
 
 ConVar g_Cvar_NormalItems;
 ConVar g_Cvar_VIPItems;
+ConVar g_Cvar_VIPFlag;
 
 char g_sNormalItems[64];
 char g_sVIPItems[64];
 #define PLUGIN_NAME "Store Roulette by Kewaii"
 #define PLUGIN_AUTHOR "Kewaii"
 #define PLUGIN_DESCRIPTION "Zephyrus Store Roulette"
-#define PLUGIN_VERSION "1.3.7"
+#define PLUGIN_VERSION "1.3.9"
 #define PLUGIN_TAG "{pink}[Roulette by Kewaii]{green}"
 
 public Plugin myinfo =
@@ -30,7 +31,8 @@ public Plugin myinfo =
 };
 
 public void OnPluginStart()
-{
+{	
+	g_Cvar_VIPFlag = CreateConVar("kewaii_roulette_vip_flag", "a", "VIP Access Flag");
 	g_Cvar_NormalItems = CreateConVar("kewaii_roulette_normal_items", "50,100,250,500", "Lists all the menu items for normal player roulette. Separate each item with a comma. Only integers allowed");
 	g_Cvar_VIPItems = CreateConVar("kewaii_roulette_vip_items", "1000,2500,5000,10000", "Lists all the menu items for VIP player roulette. Separate each item with a comma. Only integers allowed");
 	RegConsoleCmd("sm_roleta", CommandRoulette);
@@ -60,7 +62,7 @@ Menu CreateRouletteMenu(int client)
 	Format(buffer, sizeof(buffer), "%T", "ChooseType", client);
 	menu.SetTitle(buffer);	
 	menu.AddItem("player", "Player");
-	menu.AddItem("vip", "VIP", !HasClientFlag(client, ADMFLAG_CUSTOM1) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);	
+	menu.AddItem("vip", "VIP", !HasClientVIP(client) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);		
 	return menu;
 }
 
@@ -253,7 +255,7 @@ public void WinCredits(int client, int Number, int Bet)
 		{			
 			multiplier = 0;
 			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLosenoWin", client);
+			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin", client);
 		} 
 		else if(Number >= 600 && Number < 750)
 		{
@@ -294,18 +296,12 @@ public void WinCredits(int client, int Number, int Bet)
 		{
 			multiplier = 20;
 			ClientCommand(client, "playgamesound *ui/item_drop6_ancient.wav");
-		} 
-		else
-		{		
-			ClientCommand(client, "playgamesound *ui/item_drop1_common.wav");
-			CPrintToChatAll("%s %t", PLUGIN_TAG, "NoLoseNoWin", client);		
-			Store_SetClientCredits(client, Store_GetClientCredits(client) + (Bet));
-		}	
+		} 	
 		if (multiplier > 0)
 		{	
 			CPrintToChatAll("%s %t", PLUGIN_TAG, "YouWin", client, Bet * multiplier, multiplier);
+			Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * multiplier);
 		}
-		Store_SetClientCredits(client, Store_GetClientCredits(client) + Bet * multiplier);
 	}
 }
 
@@ -317,7 +313,11 @@ public Action TimerNext(Handle timer, any client)
 	}
 }
 
-public bool HasClientFlag(int client, int flag)
+public bool HasClientVIP(int client)
 {
+	char ConVarValue[32];
+	GetConVarString(g_Cvar_VIPFlag, ConVarValue, sizeof(ConVarValue));
+	int flag = ReadFlagString(ConVarValue);
 	return CheckCommandAccess(client, "", flag, true);
+	
 }
